@@ -16,16 +16,17 @@ const SidebarAdmin = () => {
   const [menuButtons, setMenuButton] = useState(sidebarData);
   const router = useRouter();
 
+  //off the all button active
   const noActiveAllButtons = () => {
-    useEffect(() => {
-      closeHandler();
-      noActiveAllButtons();
-    }, [pathname]);
-
     const result = menuButtons.map((item) => ({ ...item, active: false }));
     const menu = [...result];
     setMenuButton(menu);
   };
+
+  useEffect(() => {
+    closeHandler();
+    noActiveAllButtons();
+  }, [pathname]);
 
   const setActiveButton = (index) => {
     const result = menuButtons.map((item) => ({ ...item, active: false }));
@@ -42,7 +43,7 @@ const SidebarAdmin = () => {
 
   const logoutHandler = () => {
     setCookie("Token", "gfds", { path: "/", maxAge: 0 });
-    router.refresh()
+    router.refresh();
   };
 
   return (
