@@ -31,7 +31,9 @@ const OclackComponentD = ({ setValue, name }) => {
       }:00`,
       name
     );
-    console.log(hour)
+    console.log(`${hour.split("").length === 1 ? pm ? `${Number(hour)+12}` : `0${hour}` : hour}:${
+      min.split("").length === 1 ? `0${min}` : min
+    }:00`,)
   };
 
   return (
