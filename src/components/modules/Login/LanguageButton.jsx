@@ -28,21 +28,19 @@ const LanguageButton = () => {
         onClick={() => setOpen(!open)}
       >
         <div className="flex justify-between items-center w-[70px] ">
-          {value.value}
+          {value.value} <LangIcon />
         </div>
         {open && (
           <ul className="dropdown">
             {LangData.map((item, index) => (
               <li
-              key={index}
-                onClick={() => changeValue({...item})}
+                key={index}
+                onClick={() => changeValue({ ...item })}
+                className="text-center w-full  flex justify-center items-center"
               >
-                
-               
-                {item.value}
+                <p className="w-full text-center">{item.value}</p>
               </li>
             ))}
-          
           </ul>
         )}
       </div>

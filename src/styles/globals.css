@@ -160,6 +160,11 @@ aside::-webkit-scrollbar {
     background: #555;
 }
 
+
+.content-features-res {
+    @apply flex justify-start items-start  px-6  mt-6 border border-error;
+}
+
 /*-------------------------Lay out------------------------------*/
 
 
@@ -233,7 +238,7 @@ input[type=number]::-webkit-inner-spin-button {
 .languageButton .dropdown li::after {
     content: "";
     box-shadow: 0px 0.5px 4px 0px #00000040;
-    @apply absolute  w-[3px] rounded-[20px] h-[calc(100%-8px)] bg-success top-[calc(0)] left-[2px] hidden ;
+    @apply absolute  w-[3px] rounded-[20px] h-[calc(100%-8px)] bg-primary-light top-[calc(0)] left-[2px] hidden ;
 
 }
 .languageButton .dropdown li:hover {
