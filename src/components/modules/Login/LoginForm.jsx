@@ -66,7 +66,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form className="w-10/12 sm:w-8/12 mx-auto  min-h-[calc(100vh-200px)] flex justify-between flex-col">
+    <form className="w-10/12 sm:w-8/12 mx-auto  min-h-[calc(100vh-200px)] flex justify-between flex-col py-4">
       <div>
         <LanguageButton />
       </div>
