@@ -11,7 +11,8 @@ import { codeData, selectDataRange, selectDataType } from "@/data/selectData";
 
 import axiosPrivate from "@/lib/adminAxios";
 import { toastify } from "@/services/toastify";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const breadCrumbs = [
   {
@@ -24,15 +25,15 @@ const breadCrumbs = [
   },
 ];
 
-const CreateResidencyPage = ({ baseUrl }) => {
+const CreateResidencyPage = ({ codes, states, baseUrl }) => {
   const [openModal, setOpenModal] = useState(false);
   const [codeNum, setCodeNum] = useState("");
-
+  const [cities, setCities] = useState([]);
   const [form, setForm] = useState({
     name_of_residence: "",
     type_residence: "",
     degree_residence: "",
-    state: "",
+    state: "تهران",
     city: "",
     address: "",
     phone_number: "",
@@ -44,6 +45,24 @@ const CreateResidencyPage = ({ baseUrl }) => {
     floor_count: "",
     Language: "فارسی",
   });
+
+  const getCities = async (state) => {
+    const newCities = [];
+    const cities = await axios.post(`${baseUrl}/Location/`, {
+      step: 3,
+      country: "ایران",
+      state ,
+    });
+    for (let num of cities.data.data) {
+      newCities.push({ name: num.PR, value: num.PR });
+    }
+    
+    setCities(newCities);
+  };
+
+  useEffect(() => {
+    getCities(form.state);
+  }, [form.state]);
 
   const setHour = (data, nameVal) => {
     setForm({
@@ -63,6 +82,21 @@ const CreateResidencyPage = ({ baseUrl }) => {
     setCodeNum(data);
   };
 
+  const setState = async (data) => {
+    setCities([])
+    setForm({
+      ...form,
+      state: data,
+    });
+  };
+
+  const setCity = (data) => {
+    setForm({
+      ...form,
+      city: data,
+    });
+  };
+
   const setTypeResidence = (data) => {
     setForm({
       ...form,
@@ -79,19 +113,20 @@ const CreateResidencyPage = ({ baseUrl }) => {
 
   const submitHandler = async () => {
     const newForm = {
-      ...form ,
-      phone_number : `${codeNum}${form.phone_number}`
-    }
+      ...form,
+      phone_number: `${codeNum}${form.phone_number}`,
+    };
     try {
-      const res = await axiosPrivate.post("/ResidenceInfoCompletionView/", newForm)
-      const data = res.data
-      
-      toastify("success" , "اقامتگاه با موفقیت ایجاد شد")
+      const res = await axiosPrivate.post(
+        "/ResidenceInfoCompletionView/",
+        newForm
+      );
+      const data = res.data;
+
+      toastify("success", "اقامتگاه با موفقیت ایجاد شد");
     } catch (error) {
-      toastify("error" , "خطایی در سرور رخ داده است")
-      
+      toastify("error", "خطایی در سرور رخ داده است");
     }
-    
   };
 
   return (
@@ -173,9 +208,9 @@ const CreateResidencyPage = ({ baseUrl }) => {
           <div className="flex justify-between items-center  flex-row-reverse md:flex-row gap-2">
             <div className="w-3/12 md:w-4/12 lg:w-3/12 ">
               <FormControlSelect
-                title="کد شهر "
-                placeholder="+98"
-                data={codeData}
+                title="کد استان "
+                placeholder="کد استان"
+                data={codes}
                 setValue={setCode}
               />
             </div>
@@ -200,23 +235,18 @@ const CreateResidencyPage = ({ baseUrl }) => {
             setValue={changeHandler}
             form={form}
           />
-          <FormControlInput
+          <FormControlSelect
             title="استان "
             placeholder="لظفا نام استان خود را وارد نمایید"
-            type="text"
-            name="state"
-            value={form.state}
-            setValue={changeHandler}
-            form={form}
+            data={states}
+            setValue={setState}
           />
-          <FormControlInput
+
+          <FormControlSelect
             title="شهرستان"
             placeholder="لظفا نام شهرستان خود را وارد نمایید"
-            type="text"
-            name="city"
-            value={form.city}
-            setValue={changeHandler}
-            form={form}
+            data={cities}
+            setValue={setCity}
           />
         </div>
         <div className="flex flex-col gap-8">
@@ -295,7 +325,12 @@ const CreateResidencyPage = ({ baseUrl }) => {
         </div>
         <div className="mt-24 mb-8   flex justify-between items-center tablet:flex-row flex-col gap-8">
           <div>
-            <PageCount count={1} pageCount={4} prevLink={"/admin/settings/createresidency"} nextLink={"/admin/settings/addfeaturesresidency"} />
+            <PageCount
+              count={1}
+              pageCount={4}
+              prevLink={"/admin/settings/createresidency"}
+              nextLink={"/admin/settings/addfeaturesresidency"}
+            />
           </div>
           <div className="flex justify-center gap-2 items-center">
             <button type="button" className="btn-error outline">

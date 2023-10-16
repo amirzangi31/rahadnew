@@ -10,7 +10,6 @@ const FormControlSelect = ({ title, placeholder, data, setValue }) => {
     value: "",
     icon: "",
   });
-  
 
   const selectHandler = (data) => {
     setVal(data);
@@ -52,12 +51,12 @@ const FormControlSelect = ({ title, placeholder, data, setValue }) => {
         <div
           className={`${
             !open && "hidden"
-          } absolute top-[calc(100%-0.5rem)] left-0 w-full input-primary z-40 bg-white-main flex flex-col gap-4 font-[400]`}
+          } absolute top-[calc(100%-0.5rem)] left-0 w-full input-primary z-40 bg-white-main flex flex-col gap-4 font-[400] h-[300px] overflow-y-scroll`}
         >
           {data?.map((item, index) => (
             <div
               key={index}
-              className="cursor-pointer hover:text-primary-main hover:font-[800] flex justify-between items-center"
+              className="cursor-pointer hover:text-primary-main hover:font-[800] flex justify-between items-center  "
               onClick={() =>
                 selectHandler({
                   name: item.name,
