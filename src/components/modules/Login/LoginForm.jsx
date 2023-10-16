@@ -13,8 +13,12 @@ import LanguageButton from "./LanguageButton";
 //utils
 import { validate } from "../../../utils/validateForm";
 import Logo from "@/icons/Logo";
-import axios from "axios";
+//cookie
 import { useCookies } from "react-cookie";
+//toast
+import { toastify } from "@/services/toastify";
+//axios
+import axios from "axios";
 
 const LoginForm = () => {
   const [cookies, setCookie] = useCookies(["user"]);
@@ -53,16 +57,25 @@ const LoginForm = () => {
   //send information for login
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (Object.keys(errors).length) return;
+    if (Object.keys(errors).length) {
+      setTouched({
+        UserName: true,
+        Password: true,
+      });
+      return;
+    }
     axios
       .post("https://backendrahad.pythonanywhere.com/Login/", form)
       .then((res) => {
-        console.log(res);
+        toastify("success", "ورود با موفقیت انجام شد");
         setCookie("Token", res.data.data.Authorization, { path: "/" });
-      }).then(() => {
-        router.refresh()
       })
-      .catch((error) => console.log(error));
+      .then(() => {
+        router.refresh();
+      })
+      .catch((error) =>
+        toastify("error", "نام کاربری یا رمز عبور شما اشتباه میباشد")
+      );
   };
 
   return (

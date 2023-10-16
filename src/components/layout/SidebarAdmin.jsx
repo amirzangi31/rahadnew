@@ -26,6 +26,7 @@ const SidebarAdmin = () => {
   useEffect(() => {
     closeHandler();
     noActiveAllButtons();
+    
   }, [pathname]);
 
   const setActiveButton = (index) => {

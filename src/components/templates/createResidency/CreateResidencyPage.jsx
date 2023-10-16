@@ -79,9 +79,9 @@ const CreateResidencyPage = ({ baseUrl }) => {
   const submitHandler = async () => {
     
 
-    const res = await axiosPrivate.post("/ResidenceInfoCompletionView/", form)
-    const data = res.data
-    console.log(data)
+    // const res = await axiosPrivate.post("/ResidenceInfoCompletionView/", form)
+    // const data = res.data
+    
     
   };
 

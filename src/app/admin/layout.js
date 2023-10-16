@@ -22,6 +22,8 @@ const LayoutAdmin = ({ children }) => {
     
       <OpenMenuContextProvider>
         <AdminLayout>
+        
+
           {children}
         </AdminLayout>
       </OpenMenuContextProvider>

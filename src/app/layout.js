@@ -2,6 +2,7 @@
 
 import CookieContextProvider from '@/context/CookieContextProvider'
 import '../styles/globals.css'
+import { Toaster } from 'react-hot-toast'
 
 export const metadata = {
   title: 'Create Next App',
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
       <body >
         <CookieContextProvider>
           {children}
+          <Toaster position="top-left" />
         </CookieContextProvider>
       </body>
     </html>
