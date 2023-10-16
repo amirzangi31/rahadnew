@@ -93,7 +93,7 @@ const CreateResidencyPage = ({ baseUrl }) => {
       <HeaderContent>
         <BreadCrumbs data={breadCrumbs} />
       </HeaderContent>
-      <div className="px-0 tablet:px-8">
+      <div className="content-pages">
         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-8">
           <FormControlInput
             title="نام اقامتگاه "
@@ -144,7 +144,6 @@ const CreateResidencyPage = ({ baseUrl }) => {
             type="text"
           />
         </div>
-
         <div className="grid grid-cols-1 tablet:grid-cols-2 gap-8 mt-8">
           <div className="flex justify-between items-start flex-col">
             <label className="text-primary-main text-xl font-[500] px-4">
@@ -289,7 +288,7 @@ const CreateResidencyPage = ({ baseUrl }) => {
         </div>
         <div className="mt-24 mb-8   flex justify-between items-center tablet:flex-row flex-col gap-8">
           <div>
-            <PageCount count={1} pageCount={4} />
+            <PageCount count={1} pageCount={4} prevLink={"/admin/settings/createresidency"} nextLink={"/admin/settings/addfeaturesresidency"} />
           </div>
           <div className="flex justify-center gap-2 items-center">
             <button type="button" className="btn-error outline">

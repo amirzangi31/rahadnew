@@ -28,7 +28,7 @@ const LanguageButton = () => {
         onClick={() => setOpen(!open)}
       >
         <div className="flex justify-between items-center w-[70px] ">
-          {value.value} <Image src={value.icon} alt="icon" width={24} height={24} /> 
+          {value.value}
         </div>
         {open && (
           <ul className="dropdown">
@@ -38,7 +38,7 @@ const LanguageButton = () => {
                 onClick={() => changeValue({...item})}
               >
                 
-                <Image src={item.icon} alt="icon" width={24} height={24} /> 
+               
                 {item.value}
               </li>
             ))}

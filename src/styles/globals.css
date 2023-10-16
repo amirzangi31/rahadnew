@@ -108,6 +108,11 @@ aside::-webkit-scrollbar {
     @apply h-[calc(100vh-196.2px)] md:h-[calc(100vh-130.6px)] overflow-y-scroll;
 }
 
+.content-pages {
+    @apply px-0 tablet:px-8;
+}
+
+
 .content::-webkit-scrollbar {
     width: 9px;
     /* display: none; */
@@ -185,6 +190,19 @@ input[type=number]::-webkit-inner-spin-button {
 .input-clack-primary {
     @apply h-[72px] bg-gray-light;
 }
+
+.add-feature-check {
+    @apply w-[150px] flex justify-between items-center cursor-pointer ;
+}
+.add-feature-check  span svg {
+    @apply hidden;
+}
+.add-feature-check input:checked + span svg {
+    @apply block;
+}
+
+
+
 
 /*-----------------------Buttons--------------------------*/
 
@@ -361,7 +379,7 @@ input[type=number]::-webkit-inner-spin-button {
 
 .btn-next,
 .btn-prev {
-    @apply bg-gray-light text-gray-main cursor-default rounded-sm text-center h-[40px] w-[70px] font-[400];
+    @apply bg-gray-light text-gray-main cursor-default rounded-sm flex justify-center items-center text-center h-[40px] w-[70px] font-[400];
 }
 
 .btn-next.active,
