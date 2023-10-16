@@ -10,6 +10,7 @@ import PageCount from "@/components/modules/PageCount";
 import { codeData, selectDataRange, selectDataType } from "@/data/selectData";
 
 import axiosPrivate from "@/lib/adminAxios";
+import { toastify } from "@/services/toastify";
 import { useState } from "react";
 
 const breadCrumbs = [
@@ -34,13 +35,13 @@ const CreateResidencyPage = ({ baseUrl }) => {
     state: "",
     city: "",
     address: "",
-    phone_number: 0,
-    mobile_phone_number: 0,
+    phone_number: "",
+    mobile_phone_number: "",
     website_address: "",
     room_delivery_time: "",
     room_checkout_time: "",
     construction_date: "",
-    floor_count: 0,
+    floor_count: "",
     Language: "فارسی",
   });
 
@@ -77,12 +78,13 @@ const CreateResidencyPage = ({ baseUrl }) => {
   };
 
   const submitHandler = async () => {
-    
-
-    // const res = await axiosPrivate.post("/ResidenceInfoCompletionView/", form)
-    // const data = res.data
-    
-    
+    const newForm = {
+      ...form ,
+      phone_number : `${codeNum}${form.phone_number}`
+    }
+    const res = await axiosPrivate.post("/ResidenceInfoCompletionView/", newForm)
+    const data = res.data
+    toastify("success" , "اقامتگاه با موفقیت ایجاد شد")
   };
 
   return (
