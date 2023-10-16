@@ -8,9 +8,8 @@ const OclackComponentD = ({ setValue, name }) => {
   const [hour, setHour] = useState("");
 
   const validateHour = (e) => {
-    const hourVal = !pm ? 12 : 24;
-
-    if (e.target.value > hourVal || e.target.value < 0) e.target.value = hourVal;
+    
+    if (e.target.value > 12 || e.target.value < 0) e.target.value = 12;
     if (e.target.value.split("").length > 2) e.target.value = "00";
     setHour(e.target.value);
   };
@@ -23,7 +22,6 @@ const OclackComponentD = ({ setValue, name }) => {
 
   const setData = () => {
     if (min.split("").length === 0 || hour.split("").length === 0) {
-      console.log("error");
       return;
     }
 
@@ -33,6 +31,7 @@ const OclackComponentD = ({ setValue, name }) => {
       }:00`,
       name
     );
+    console.log(hour)
   };
 
   return (

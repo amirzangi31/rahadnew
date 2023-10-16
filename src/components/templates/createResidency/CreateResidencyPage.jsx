@@ -82,9 +82,16 @@ const CreateResidencyPage = ({ baseUrl }) => {
       ...form ,
       phone_number : `${codeNum}${form.phone_number}`
     }
-    const res = await axiosPrivate.post("/ResidenceInfoCompletionView/", newForm)
-    const data = res.data
-    toastify("success" , "اقامتگاه با موفقیت ایجاد شد")
+    try {
+      const res = await axiosPrivate.post("/ResidenceInfoCompletionView/", newForm)
+      const data = res.data
+      
+      toastify("success" , "اقامتگاه با موفقیت ایجاد شد")
+    } catch (error) {
+      toastify("error" , "خطایی در سرور رخ داده است")
+      
+    }
+    
   };
 
   return (

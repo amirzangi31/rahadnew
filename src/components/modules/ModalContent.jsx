@@ -29,11 +29,11 @@ const ModalContent = ({ open, setOpen }) => {
           <p className="text-gray-dark w-full text-right px-4">لطفا آیتم مورد نظر خود را وارد نمایید </p>
         <input type="text" className="input-primary " />
           </div>
-        <div className="flex gap-2 py-6 ">
-          <button type="button" className="btn-success-sm">
+        <div className="flex flex-row-reverse gap-4 py-6 ">
+          <button type="button" className="btn-success">
             ثبت
           </button>
-          <button type="button" className="btn-error-sm outline" onClick={() => setOpen(false)}>
+          <button type="button" className="btn-error outline" onClick={() => setOpen(false)}>
             لغو
           </button></div>
         </div>
