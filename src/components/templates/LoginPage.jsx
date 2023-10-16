@@ -11,7 +11,7 @@ const LoginPage = () => {
       </div>
       <div className="bg-[#06355F] min-h-screen w-6/12 rounded-tr-full rounded-br-full hidden md:block">
         <div className="flex justify-start items-center min-h-screen ">
-            <Image src="/heroLogin.svg"  width={100} height={100} alt="hero login" className="w-10/12" /> 
+            <Image src="/heroLogin.svg"  width={100} height={100} alt="hero login" priority={true}  className="w-full xl:w-10/12" /> 
         </div>
       </div>
      

@@ -43,7 +43,6 @@ module.exports = {
       white: {
         light: "#FAFAFA",
         main: "#FFFFFF"
-        
       }
     },
     extend: {

@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+//NEXT
+import { useRouter } from "next/navigation";
 
 //Pngs
 import User from "@/icons/login/User";
@@ -11,20 +13,24 @@ import LanguageButton from "./LanguageButton";
 //utils
 import { validate } from "../../../utils/validateForm";
 import Logo from "@/icons/Logo";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 const LoginForm = () => {
+  const [cookies, setCookie] = useCookies(["user"]);
   const [form, setForm] = useState({
-    name: "",
-    password: "",
+    UserName: "",
+    Password: "",
   });
 
   const [hiddenPas, setHiddenPas] = useState(false);
-
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({
-    name: false,
-    password: false,
+    UserName: false,
+    Password: false,
   });
+
+  const router = useRouter();
 
   useEffect(() => {
     setErrors(validate(form));
@@ -45,8 +51,18 @@ const LoginForm = () => {
   };
 
   //send information for login
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    if (Object.keys(errors).length) return;
+    axios
+      .post("https://backendrahad.pythonanywhere.com/Login/", form)
+      .then((res) => {
+        console.log(res);
+        setCookie("Token", res.data.data.Authorization, { path: "/" });
+      }).then(() => {
+        router.refresh()
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -66,15 +82,15 @@ const LoginForm = () => {
         </label>
         <div
           className={`border 
-          ${errors.name && !touched.name && "border-gray-dark"} 
-          ${!errors.name && touched.name && "border-success"} 
+          ${errors.UserName && !touched.UserName && "border-gray-light"} 
+          ${!errors.UserName && touched.UserName && "border-success"} 
           ${
-            errors.name && touched.name && "border-error"
+            errors.UserName && touched.UserName && "border-error"
           } rounded-[10px] w-full flex justify-end items-center p-3`}
         >
           <input
             onFocus={fucosHandler}
-            name="name"
+            name="UserName"
             onChange={changeHandler}
             type="text"
             id="userName"
@@ -85,28 +101,29 @@ const LoginForm = () => {
             <User />
           </span>
         </div>
-        {errors.name && touched.name && (
-          <span className="text-[12px] text-error ">{errors.name}</span>
+        {errors.name && touched.UserName && (
+          <span className="text-[12px] text-error ">{errors.UserName}</span>
         )}
       </div>
       <div className="w-full  flex flex-col items-start">
-        <label htmlFor="Password" className=" my-2 mr-1 text-text-blue ">
+        <label htmlFor="Password" className=" my-2 mr-1 text-primary-main  ">
           رمز عبور
         </label>
         <div
           className={`border 
-          ${errors.password && !touched.password && "border-gray-dark"} 
-          ${!errors.password && touched.password && "border-secondary"} 
+          ${errors.Password && !touched.Password && "border-gray-light"} 
+          ${!errors.Password && touched.Password && "border-success"} 
           ${
-            errors.password && touched.password && "border-error"
+            errors.Password && touched.Password && "border-error"
           } rounded-[10px] w-full flex justify-end items-center p-3`}
         >
           <input
             onFocus={fucosHandler}
-            name="password"
+            name="Password"
             onChange={changeHandler}
             type={hiddenPas ? "text" : "password"}
             id="Password"
+            autoComplete="password"
             className="bg-transparent border-none outline-none flex-1 placeholder:text-[12px] text-gray-dark"
             placeholder="رمز عبور خود را وارد کنید"
           />
@@ -114,8 +131,8 @@ const LoginForm = () => {
             <HiddenIcon />
           </span>
         </div>
-        {errors.password && touched.password && (
-          <span className="text-[12px] text-error ">{errors.password}</span>
+        {errors.Password && touched.Password && (
+          <span className="text-[12px] text-error ">{errors.Password}</span>
         )}
         <a href="#" className="w-full text-left text-primary-main">
           فراموشی رمز
@@ -124,9 +141,10 @@ const LoginForm = () => {
       <div className="text-center">
         <button
           type="submit"
-          className="w-[200px] h-[55px] rounded-sm text-white-main font-[500]"
+          className="w-[200px] h-[55px] rounded-sm text-white-main font-[500] mt-4"
           style={{
-            background: "linear-gradient(90deg, #087592 43.67%, #2393B0 97.5%)",
+            background:
+              "linear-gradient(90deg, #087592 43.67%, #2393B0 97.5%) ",
           }}
           onClick={submitHandler}
         >

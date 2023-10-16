@@ -1,14 +1,13 @@
-import EnglandIcon from "@/icons/btnsLang/EnglandIcon"
-import IranIcon from "@/icons/btnsLang/IranIcon"
+
 
 const LangData = [
     {
         value : "PR",
-        icon : <IranIcon /> 
+        icon : "/iran.png"
     },
     {
         value : "EN",
-        icon : <EnglandIcon /> 
+        icon : "/england.png"
     },
 ]
 

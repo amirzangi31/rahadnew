@@ -3,13 +3,14 @@ import React, { useState } from "react";
 
 import LangIcon from "./LangIcon";
 import LangData from "@/data/LangData";
+import Image from "next/image";
 
 const LanguageButton = () => {
   const [open, setOpen] = useState(false);
 
   const [value, setValue] = useState({
     value: "PR",
-    icon: <LangIcon />,
+    icon: "/Language.png",
   });
 
   //change value button
@@ -27,7 +28,7 @@ const LanguageButton = () => {
         onClick={() => setOpen(!open)}
       >
         <div className="flex justify-between items-center w-[70px] ">
-          {value.value} {value.icon}
+          {value.value} <Image src={value.icon} alt="icon" width={24} height={24} /> 
         </div>
         {open && (
           <ul className="dropdown">
@@ -36,7 +37,8 @@ const LanguageButton = () => {
               key={index}
                 onClick={() => changeValue({...item})}
               >
-                {item.icon}
+                
+                <Image src={item.icon} alt="icon" width={24} height={24} /> 
                 {item.value}
               </li>
             ))}

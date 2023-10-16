@@ -1,5 +1,6 @@
 
 
+import CookieContextProvider from '@/context/CookieContextProvider'
 import '../styles/globals.css'
 
 export const metadata = {
@@ -11,9 +12,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir='rtl'>
       <body >
-        
+        <CookieContextProvider>
           {children}
-        
+        </CookieContextProvider>
       </body>
     </html>
   )

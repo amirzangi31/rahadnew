@@ -1,10 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-import ReactMapGL, {
-  
-  Marker,
-  
-} from "react-map-gl";
+import ReactMapGL, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 const MapComponent = () => {
@@ -15,7 +11,7 @@ const MapComponent = () => {
         initialViewState={{
           latitude: 35.690827570339636,
           longitude: 51.39253965697321,
-          zoom:16,
+          zoom: 16,
         }}
         mapStyle="mapbox://styles/mapbox/streets-v11"
       >
@@ -23,9 +19,7 @@ const MapComponent = () => {
           latitude={35.690827570339636}
           longitude={51.39253965697321}
           draggable
-          onDragEnd={(e) =>
-            console.log(e)
-          }
+          onDragEnd={(e) => console.log(e)}
         />
       </ReactMapGL>
     </div>

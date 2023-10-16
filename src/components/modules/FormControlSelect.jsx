@@ -2,30 +2,36 @@
 
 import React, { useState } from "react";
 
-const FormControlSelect = ({ title, placeholder, data }) => {
-  
+const FormControlSelect = ({ title, placeholder, data, setValue }) => {
   const [open, setOpen] = useState(false);
 
-  const [value, setValue] = useState({
+  const [val, setVal] = useState({
     name: placeholder,
     value: "",
-    icon : ""
+    icon: "",
   });
+  
 
   const selectHandler = (data) => {
-    setValue(data);
+    setVal(data);
     setOpen(false);
+    setValue(data.value);
   };
 
   return (
     <div className="flex justify-between items-start flex-col">
-      <label className="text-primary-main text-xl font-[500] px-4">{title}</label>
+      <label className="text-primary-main text-xl font-[500] px-4">
+        {title}
+      </label>
       <div className="input-primary relative ">
         <div
           className="flex justify-between items-center cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          <span className="flex justify-center items-center gap-2"> {value.name} {value.icon}</span>
+          <span className="flex justify-center items-center gap-2">
+            {" "}
+            {val.name} {val.icon}
+          </span>
           <span>
             <svg
               width="16"
@@ -50,14 +56,19 @@ const FormControlSelect = ({ title, placeholder, data }) => {
         >
           {data?.map((item, index) => (
             <div
-            key={index}
+              key={index}
               className="cursor-pointer hover:text-primary-main hover:font-[800] flex justify-between items-center"
-              onClick={() => selectHandler({ name: item.name , icon : item.icon, value: item.value })}
+              onClick={() =>
+                selectHandler({
+                  name: item.name,
+                  icon: item.icon,
+                  value: item.value,
+                })
+              }
             >
               {item.name} {item.icon}
             </div>
           ))}
-          
         </div>
       </div>
     </div>

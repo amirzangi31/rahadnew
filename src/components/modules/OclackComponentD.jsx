@@ -2,17 +2,37 @@
 
 import React, { useState } from "react";
 
-
-
-const OclackComponentD = () => {
+const OclackComponentD = ({ setValue, name }) => {
   const [pm, setPm] = useState(false);
+  const [min, setMin] = useState("");
+  const [hour, setHour] = useState("");
 
   const validateHour = (e) => {
-    if (e.target.value > 12 || e.target.value < 0) e.target.value = 12;
+    const hourVal = !pm ? 12 : 24;
+
+    if (e.target.value > hourVal || e.target.value < 0) e.target.value = hourVal;
+    if (e.target.value.split("").length > 2) e.target.value = "00";
+    setHour(e.target.value);
   };
   const validateMinute = (e) => {
     if (e.target.value > 59 || e.target.value < 0) e.target.value = 59;
+    if (e.target.value.split("").length > 2) e.target.value = "00";
+    if (e.target.value === "") return;
+    setMin(e.target.value);
+  };
 
+  const setData = () => {
+    if (min.split("").length === 0 || hour.split("").length === 0) {
+      console.log("error");
+      return;
+    }
+
+    setValue(
+      `${hour.split("").length === 1 ? `0${hour}` : hour}:${
+        min.split("").length === 1 ? `0${min}` : min
+      }:00`,
+      name
+    );
   };
 
   return (
@@ -22,7 +42,7 @@ const OclackComponentD = () => {
           <div className="h-[72px] border border-gray-light rounded-sm flex justify-between items-center flex-col overflow-hidden">
             <span
               className={`block cursor-pointer p-2   ${
-                !pm? "bg-gray-main text-white-main" : "bg-white-main"
+                !pm ? "bg-gray-main text-white-main" : "bg-white-main"
               }`}
               onClick={() => setPm(false)}
             >
@@ -64,7 +84,11 @@ const OclackComponentD = () => {
       </div>
       <div className="mt-6 flex justify-between items-center w-full">
         <div>
-          <button type="button" className="mx-2 text-primary-light">
+          <button
+            type="button"
+            className="mx-2 text-primary-light"
+            onClick={setData}
+          >
             تایید
           </button>
           <button type="button" className="mx-2 text-primary-light">

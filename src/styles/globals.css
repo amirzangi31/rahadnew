@@ -105,7 +105,7 @@ aside::-webkit-scrollbar {
 
 
 .content {
-    @apply h-[calc(100vh-196.2px)] md:h-[calc(100vh-113.6px)] overflow-y-scroll;
+    @apply h-[calc(100vh-196.2px)] md:h-[calc(100vh-130.6px)] overflow-y-scroll;
 }
 
 .content::-webkit-scrollbar {

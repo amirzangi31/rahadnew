@@ -1,17 +1,17 @@
 const validate = (data) => {
     const error = {}
 
-    if(!data.name.trim()){
-        error.name = "نام کاربری خود راوارد کنید"
+    if(!data.UserName.trim()){
+        error.UserName = "نام کاربری خود راوارد کنید"
     }else {
-        delete error.name;
+        delete error.UserName;
     }
-    if(!data.password.trim()){
-        error.password = " رمز عبور خود راوارد کنید"
-    }else if(data.password.length < 8) {
-        error.password = "رمز عبور باید 8رقم یا بیشتر باشد"
+    if(!data.Password.trim()){
+        error.Password = " رمز عبور خود راوارد کنید"
+    }else if(data.Password.length < 3) {
+        error.Password = "رمز عبور باید 8رقم یا بیشتر باشد"
     }else {
-        delete error.password
+        delete error.Password
     }
 
 

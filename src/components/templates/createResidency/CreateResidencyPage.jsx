@@ -8,6 +8,8 @@ import ModalContent from "@/components/modules/ModalContent";
 import OclackComponentD from "@/components/modules/OclackComponentD";
 import PageCount from "@/components/modules/PageCount";
 import { codeData, selectDataRange, selectDataType } from "@/data/selectData";
+
+import axiosPrivate from "@/lib/adminAxios";
 import { useState } from "react";
 
 const breadCrumbs = [
@@ -21,8 +23,67 @@ const breadCrumbs = [
   },
 ];
 
-const CreateResidencyPage = () => {
+const CreateResidencyPage = ({ baseUrl }) => {
   const [openModal, setOpenModal] = useState(false);
+  const [codeNum, setCodeNum] = useState("");
+
+  const [form, setForm] = useState({
+    name_of_residence: "",
+    type_residence: "",
+    degree_residence: "",
+    state: "",
+    city: "",
+    address: "",
+    phone_number: 0,
+    mobile_phone_number: 0,
+    website_address: "",
+    room_delivery_time: "",
+    room_checkout_time: "",
+    construction_date: "",
+    floor_count: 0,
+    Language: "فارسی",
+  });
+
+  const setHour = (data, nameVal) => {
+    setForm({
+      ...form,
+      [nameVal]: data,
+    });
+  };
+
+  const changeHandler = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const setCode = (data) => {
+    setCodeNum(data);
+  };
+
+  const setTypeResidence = (data) => {
+    setForm({
+      ...form,
+      type_residence: data,
+    });
+  };
+
+  const setDegreeResidence = (data) => {
+    setForm({
+      ...form,
+      degree_residence: data,
+    });
+  };
+
+  const submitHandler = async () => {
+    
+
+    const res = await axiosPrivate.post("/ResidenceInfoCompletionView/", form)
+    const data = res.data
+    console.log(data)
+    
+  };
 
   return (
     <>
@@ -36,40 +97,59 @@ const CreateResidencyPage = () => {
             title="نام اقامتگاه "
             placeholder="نام اقامتگاه را وارد کنید"
             type="text"
+            name="name_of_residence"
+            value={form.name_of_residence}
+            setValue={changeHandler}
+            form={form}
           />
           <FormControlSelect
             title="نوع اقامتگاه"
             placeholder="انتخاب کنید"
             data={selectDataType}
+            setValue={setTypeResidence}
           />
           <FormControlInput
             title="آدرس وبسایت"
             placeholder="لینک آدرس وبسایت خود را وارد نمایید "
             type="text"
+            name="website_address"
+            value={form.website_address}
+            setValue={changeHandler}
+            form={form}
           />
           <FormControlSelect
             title="درجه اقامتگاه"
             placeholder="یک مورد را انتخاب کنید"
             data={selectDataRange}
+            setValue={setDegreeResidence}
           />
           <FormControlInput
             title="تاریخ ساخت اقامتگاه"
             placeholder="تاریخ مورد نظر خود را وارد نمایید"
             type="text"
+            name="construction_date"
+            value={form.construction_date}
+            setValue={changeHandler}
+            form={form}
           />
           <FormControlInput
+            name="floor_count"
+            value={form.floor_count}
+            setValue={changeHandler}
+            form={form}
             title="تعداد طبقات اقامتگاه"
             placeholder="تعداد طبقات اقامتگاه خود را وارد نمایید"
             type="text"
           />
         </div>
+
         <div className="grid grid-cols-1 tablet:grid-cols-2 gap-8 mt-8">
           <div className="flex justify-between items-start flex-col">
             <label className="text-primary-main text-xl font-[500] px-4">
               ساعت تخلیه اتاق
             </label>
             <div className="input-primary" style={{ padding: "20px 0 " }}>
-              <OclackComponentD />
+              <OclackComponentD setValue={setHour} name="room_checkout_time" />
             </div>
           </div>
           <div className="flex justify-between items-start flex-col">
@@ -77,7 +157,7 @@ const CreateResidencyPage = () => {
               ساعت تحویل اتاق
             </label>
             <div className="input-primary" style={{ padding: "20px 0 " }}>
-              <OclackComponentD />
+              <OclackComponentD setValue={setHour} name="room_delivery_time" />
             </div>
           </div>
         </div>
@@ -88,6 +168,7 @@ const CreateResidencyPage = () => {
                 title="کد شهر "
                 placeholder="+98"
                 data={codeData}
+                setValue={setCode}
               />
             </div>
             <div className="w-9/12 md:w-8/12 lg:w-9/12 ">
@@ -95,6 +176,10 @@ const CreateResidencyPage = () => {
                 title="شماره تماس"
                 placeholder="شماره تماس اقامتگاه خود را وارد نمایید ."
                 type="text"
+                name="phone_number"
+                value={form.phone_number}
+                setValue={changeHandler}
+                form={form}
               />
             </div>
           </div>
@@ -102,16 +187,28 @@ const CreateResidencyPage = () => {
             title="شماره تلفن همراه"
             placeholder="لظفا شماره همراه خود را وارد نمایید ."
             type="text"
+            name="mobile_phone_number"
+            value={form.mobile_phone_number}
+            setValue={changeHandler}
+            form={form}
           />
           <FormControlInput
             title="استان "
             placeholder="لظفا نام استان خود را وارد نمایید"
             type="text"
+            name="state"
+            value={form.state}
+            setValue={changeHandler}
+            form={form}
           />
           <FormControlInput
             title="شهرستان"
             placeholder="لظفا نام شهرستان خود را وارد نمایید"
             type="text"
+            name="city"
+            value={form.city}
+            setValue={changeHandler}
+            form={form}
           />
         </div>
         <div className="flex flex-col gap-8">
@@ -120,6 +217,10 @@ const CreateResidencyPage = () => {
               title="آدرس"
               placeholder="لطفا آدرس اقامتگاه خود را وارد نمایید"
               type="text"
+              name="address"
+              value={form.address}
+              setValue={changeHandler}
+              form={form}
             />
           </div>
           <div className="border w-full border-gray-light py-4  rounded-sm text-lg ">
@@ -192,7 +293,11 @@ const CreateResidencyPage = () => {
             <button type="button" className="btn-error outline">
               کنسل
             </button>
-            <button type="button" className="btn-success">
+            <button
+              type="button"
+              className="btn-success"
+              onClick={submitHandler}
+            >
               ثبت تغییرات
             </button>
           </div>

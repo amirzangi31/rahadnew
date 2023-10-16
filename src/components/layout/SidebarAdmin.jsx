@@ -6,49 +6,51 @@ import sidebarData from "@/data/SidebarData";
 import Loggout from "@/icons/iconsSidebar/Loggout";
 import { OpenMenuContext } from "@/context/OpenMenuContextProvider";
 import CloseIcon from "@/icons/CloseIcon";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useCookies } from "react-cookie";
 
 const SidebarAdmin = () => {
+  const [cookie, setCookie, removeCookie] = useCookies(["user"]);
   const { open, closeHandler } = useContext(OpenMenuContext);
   const pathname = usePathname();
-  const [menuButtons , setMenuButton] = useState(sidebarData)
-  
+  const [menuButtons, setMenuButton] = useState(sidebarData);
+  const router = useRouter();
+
   const noActiveAllButtons = () => {
-    const result = menuButtons.map(item => (
-      {...item , active : false}
-      ))
-      const menu = [...result]
-      setMenuButton(menu)
-  }  
+    useEffect(() => {
+      closeHandler();
+      noActiveAllButtons();
+    }, [pathname]);
+
+    const result = menuButtons.map((item) => ({ ...item, active: false }));
+    const menu = [...result];
+    setMenuButton(menu);
+  };
 
   const setActiveButton = (index) => {
-    const result = menuButtons.map(item => (
-      {...item , active : false}
-    ))
-    const menu = [...result]
+    const result = menuButtons.map((item) => ({ ...item, active: false }));
+    const menu = [...result];
 
-    if(menuButtons[index].active === true) {
-        menu[index].active = false
-    }else {
-      menu[index].active = true
+    if (menuButtons[index].active === true) {
+      menu[index].active = false;
+    } else {
+      menu[index].active = true;
     }
 
-    setMenuButton(menu)
-  }
+    setMenuButton(menu);
+  };
 
+  const logoutHandler = () => {
+    setCookie("Token", "gfds", { path: "/", maxAge: 0 });
+    router.refresh()
+  };
 
-  useEffect(() => {
-    closeHandler();
-    noActiveAllButtons();
-  }, [pathname]);
   return (
-    
     <aside
       className={`md:w-[200px] tablet:w-[260px] pb-10 px-2 md:px-0  overflow-y-scroll bg-white-main border-l-2 border-gray-light/30 w-full h-full  absolute top-0 ${
         open ? "right-0" : "right-[-100%]"
       } md:right-0 md:pr-5 flex justify-start items-center flex-col gap-2`}
     >
-      
       <div className="h-[113.6px] flex justify-between md:justify-center w-full px-4">
         <div
           className="flex justify-center items-center md:hidden"
@@ -70,16 +72,20 @@ const SidebarAdmin = () => {
         </svg>
       </div>
       {menuButtons.map((item, index) => (
-        <ButtonSidebar key={index} {...item} index={index}  setActive={setActiveButton} offAll={noActiveAllButtons} />
+        <ButtonSidebar
+          key={index}
+          {...item}
+          index={index}
+          setActive={setActiveButton}
+          offAll={noActiveAllButtons}
+        />
       ))}
-      <div className="btn-sidebar">
+      <div className="btn-sidebar" onClick={logoutHandler}>
         <Loggout />
         خروج از حساب کاربری
         <div></div>
       </div>
     </aside>
-    
-
   );
 };
 

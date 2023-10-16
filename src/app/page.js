@@ -1,7 +1,13 @@
+import DashboardPage from "@/components/templates/DashboardPage";
+import { redirect } from "next/navigation";
 
 
 export default function Home() {
+
+ redirect("/admin")
+
+
   return (
-    <h1>home</h1>
+    <DashboardPage /> 
   )
 }

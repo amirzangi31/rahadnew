@@ -12,62 +12,62 @@ import Best from "@/icons/selectIcons/Best";
 const selectDataType = [
     {
       name: "هتل",
-      value: "hotel",
+      value: 1,
       icon: "",
     },
     {
       name: "هتل آپارتمان",
-      value: "aaa",
+      value: 2,
       icon: "",
     },
     {
       name: "سوییت",
-      value: "apartment",
+      value: 3,
       icon: "",
     },
     
     {
       name: "ویلا",
-      value: "apartment",
+      value: 4,
       icon: "",
     },
     
     {
       name: "پلاژ",
-      value: "apartment",
+      value: 5,
       icon: "",
     },
     
     {
       name: "مهمان پذیر",
-      value: "apartment",
+      value: 6,
       icon: "",
     },
  
     {
       name: "مسافرخانه",
-      value: "apartment",
+      value: 7,
       icon: "",
     },    
     {
       name: "مهمان سرا",
-      value: "apartment",
+      value: 8,
       icon: "",
     },
 
     {
       name: "بومگردی",
-      value: "apartment",
+      value: 9,
       icon: "",
     },    
     {
       name: "پانسیون",
-      value: "apartment",
+      value: 10,
       icon: "",
     },    
     {
       name: "واحد اقامتی",
-      value: "apartment",
+      value: 11,
       icon: "",
     },    
 
@@ -81,51 +81,51 @@ const selectDataType = [
   const selectDataRange = [
     {
       name: "پنج ستاره",
-      value: "5",
+      value: 1,
       icon: <FiveStar />,
     },
     {
       name: "چهار ستاره",
-      value: "ِ4",
+      value: 2,
       icon: <FourStart />,
     },
     {
       name: "سه ستاره",
-      value: "3",
+      value: 3,
       icon: <ThreeStar />,
     },
     {
       name: "دو ستاره",
-      value: "2",
+      value: 4,
       icon: <TwoStar />,
     },
     {
       name: "یک ستاره",
-      value: "1",
+      value: 5,
       icon: <OneStart />,
     },
     {
       name: "درجه سه",
-      value: "three",
+      value: 6,
       icon: <ThreeLike />,
     },
     {
       name: "درجه دو",
-      value: "two",
+      value: 7,
       icon: <TwoLike />,
     },
     {
       name: "درجه یک",
-      value: "one",
+      value: 8,
       icon: <OneLike />,
     },
     {
       name: "ممتاز ",
-      value: "best",
+      value: 9,
       icon: <Best />,
     },
   ];
-const codeData = [
+const codeData = [  
   {
     name : "034",
     value : "034"

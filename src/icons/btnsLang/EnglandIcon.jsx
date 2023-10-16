@@ -22,8 +22,8 @@ const EnglandIcon = () => {
       </mask>
       <g mask="url(#mask0_1605_36351)">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M0 0.5V12.5H16V0.5H0Z"
           fill="#2E42A5"
         />
@@ -37,8 +37,8 @@ const EnglandIcon = () => {
           height="13"
         >
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M0 0.5V12.5H16V0.5H0Z"
             fill="white"
           />
@@ -74,14 +74,14 @@ const EnglandIcon = () => {
             />
             <mask id="path-9-inside-1_1605_36351" fill="white">
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M9.88911 -0.5H6.11133V4.5H-0.986328V8.5H6.11133V13.5H9.88911V8.5H17.0137V4.5H9.88911V-0.5Z"
               />
             </mask>
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M9.88911 -0.5H6.11133V4.5H-0.986328V8.5H6.11133V13.5H9.88911V8.5H17.0137V4.5H9.88911V-0.5Z"
               fill="#F50100"
             />
